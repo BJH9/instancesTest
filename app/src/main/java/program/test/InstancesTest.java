@@ -25,6 +25,7 @@ public class InstancesTest {
 	private int locationInformation;
 	
 	private int[][] v; //뒤집힌 instances
+	private int[][] arrayForMetricSelection;
 	private int[] b;//sliced instance
 	private int[] ob;//original sliced instance
 	private int[][] c; //위치정보 저장
@@ -116,6 +117,7 @@ public class InstancesTest {
 		
 		v = new int[column][row];// 행과 열 뒤집은 배열 거 여기 저장
 		b = new int[row];// 뒤집힌 배열, 1행 여기 저장
+		arrayForMetricSelection = new int[column][row];
 		
 		for(int i = 0; i < column - 1; i++) {
 			System.out.println("");
@@ -280,9 +282,29 @@ public class InstancesTest {
 		}
 		System.out.println("");
 		
-		for(int i = 0; i < row - 1; i++) {
-			for(int j = 0; j < column - 1; j++) {
+		
+		
+		for(int i = 0; i < column - 1; i++) {//metric selection을 위해 arrayForMetricSelection에서 violation에 1을 입력
+			for(int j = 0; j < row - 1; j++) {
+				System.out.print(".");
+				if(v[i][j] < medians[j] && bugLabel[j].equals("B")) {
+					arrayForMetricSelection[i][j] = 1;
+				}
+				if(v[i][j] > medians[j] && bugLabel[j].equals("C")) {
+					arrayForMetricSelection[i][j] = 1;
+				}
 				
+			}
+		}
+		
+		
+		System.out.println("");
+		System.out.println("");
+		System.out.println("violation위치");
+		for(int i = 0; i < column - 1; i++) {
+			System.out.println("");
+			for(int j = 0; j < row - 1; j++) {
+				System.out.print(arrayForMetricSelection[i][j] + ", ");
 			}
 		}
 		
