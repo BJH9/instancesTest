@@ -42,6 +42,7 @@ public class InstancesTest {
 	private int k;
 	private int t;//gruop[t][]의 행에 해당
 	private int q;
+	private int y;//medians[y]
 	private int[] kNumber;
 	int p;
 	
@@ -70,6 +71,7 @@ public class InstancesTest {
 	}
 	
 	private void run(String[] args) {
+		y = 0;
 		q = 0;
 		ins = loadArff(args[0]);//ins에 할당
 		in = ins.get(0);//첫 줄 instance 할당
@@ -162,6 +164,8 @@ public class InstancesTest {
 		System.out.println("");
 		
 		median = b[row / 2]; //median
+		medians[y] = median;
+		y++;
 		
 		System.out.println("median 값: " + median);
 		
@@ -222,7 +226,7 @@ public class InstancesTest {
 		
 		t = 0;
 		System.out.println("groups");
-		for(int i = 0; i < row - 1; i++) {
+		for(int i = 0; i < row - 1; i++) {//그룹나누기
 			if(locationInformation == -1)
 				locationInformation = i;
 			
@@ -252,7 +256,7 @@ public class InstancesTest {
 		System.out.println("그룹의 중간값 개수: " + vMedian);
 		System.out.println("");
 		
-		for(int i = 0; i < row - 1; i++) {
+		for(int i = 0; i < row - 1; i++) {//라벨붙이기
 			if(oViolationNumber[i] > 13) {
 				bugLabel[i] = "B";
 			}
@@ -263,12 +267,24 @@ public class InstancesTest {
 		
 		System.out.println("");
 		System.out.println("버그 분류");
-		for(int i = 0; i < row - 1; i++) {
+		for(int i = 0; i < row - 1; i++) {//버그 라벨
 			System.out.print("instance" + i +  " : "+ bugLabel[i] + ", ");
 		}
 		System.out.println("");
 		
+		System.out.println("");
+		System.out.println("median값들");
+		for(int i = 0; i < column - 1; i++) {//median값들
+			System.out.print(i + "번 째 metric의 median: " + medians[i] + ", "
+					+ "");
+		}
+		System.out.println("");
 		
+		for(int i = 0; i < row - 1; i++) {
+			for(int j = 0; j < column - 1; j++) {
+				
+			}
+		}
 		
 	}
 
