@@ -30,12 +30,14 @@ public class InstancesTest {
 	private int[][] c; //위치정보 저장
 	private int[] violationNumber;//instance별 violation 개수
 	private int[] oViolationNumber;//original instance별 violation 개수
+	private String[] bugLabel;
 	private int[][] group;//violation개수에 따른 gruop분류
 	private int[] numbersInGroup;
 	private int numberInGroup;
 	
 	
 	private int median;
+	private int[] medians;
 	private int vMedian;
 	private int k;
 	private int t;//gruop[t][]의 행에 해당
@@ -80,12 +82,15 @@ public class InstancesTest {
 		t = 0;
 		group = new int[200][row];
 		
+		medians = new int[column];
+		
 		
 		
 		
 		
 		violationNumber = new int[row];
 		oViolationNumber = new int[row];
+		bugLabel = new String[row];
 		
 		for(int i = 0; i < row; i++) {
 			violationNumber[i] = 0;
@@ -157,6 +162,7 @@ public class InstancesTest {
 		System.out.println("");
 		
 		median = b[row / 2]; //median
+		
 		System.out.println("median 값: " + median);
 		
 		for(int i = 0; i < row - 1; i++) {//violation 위치
@@ -200,6 +206,9 @@ public class InstancesTest {
 		for(int i = 0; i < row - 1; i++) {
 			oViolationNumber[i] = violationNumber[i];
 		}
+		for(int i = 0; i < row - 1; i++) {
+			bugLabel[i] = String.valueOf(violationNumber[i]);
+		}
 		System.out.println("");
 		
 		Arrays.sort(violationNumber);
@@ -239,7 +248,25 @@ public class InstancesTest {
 		System.out.println("");
 		System.out.println("나눠진 그룹의 개수: " + t);
 		
+		vMedian = t / 2;
+		System.out.println("그룹의 중간값 개수: " + vMedian);
+		System.out.println("");
 		
+		for(int i = 0; i < row - 1; i++) {
+			if(oViolationNumber[i] > 13) {
+				bugLabel[i] = "B";
+			}
+			else {
+				bugLabel[i] = "C";
+			}
+		}
+		
+		System.out.println("");
+		System.out.println("버그 분류");
+		for(int i = 0; i < row - 1; i++) {
+			System.out.print("instance" + i +  " : "+ bugLabel[i] + ", ");
+		}
+		System.out.println("");
 		
 		
 		
