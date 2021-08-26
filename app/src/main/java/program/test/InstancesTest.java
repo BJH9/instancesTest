@@ -22,6 +22,7 @@ public class InstancesTest {
 	
 	private int column;
 	private int row;
+	private int locationInformation;
 	
 	private int[][] v; //뒤집힌 instances
 	private int[] b;//sliced instance
@@ -29,11 +30,16 @@ public class InstancesTest {
 	private int[][] c; //위치정보 저장
 	private int[] violationNumber;//instance별 violation 개수
 	private int[] oViolationNumber;//original instance별 violation 개수
+	private int[][] group;//violation개수에 따른 gruop분류
+	private int[] numbersInGroup;
+	private int numberInGroup;
 	
 	
 	private int median;
 	private int vMedian;
 	private int k;
+	private int t;//gruop[t][]의 행에 해당
+	private int q;
 	private int[] kNumber;
 	int p;
 	
@@ -62,13 +68,21 @@ public class InstancesTest {
 	}
 	
 	private void run(String[] args) {
-		
-		
+		q = 0;
 		ins = loadArff(args[0]);//ins에 할당
-		
 		in = ins.get(0);//첫 줄 instance 할당
 		column = in.numAttributes();//열의 개수
 		row = ins.size();//행의 개수
+		
+		numbersInGroup = new int[column];
+		numberInGroup = 0;
+		locationInformation = -1;
+		t = 0;
+		group = new int[200][row];
+		
+		
+		
+		
 		
 		violationNumber = new int[row];
 		oViolationNumber = new int[row];
@@ -197,13 +211,35 @@ public class InstancesTest {
 		System.out.println("");
 		System.out.println("");
 		
-		System.out.println("violation median 값");
-		vMedian = violationNumber[row/2];
-		System.out.println(vMedian);
-		
+		t = 0;
+		System.out.println("groups");
 		for(int i = 0; i < row - 1; i++) {
-			violationNumber[i]
+			if(locationInformation == -1)
+				locationInformation = i;
+			
+			if(violationNumber[i] != violationNumber[i+1]) {
+				
+				System.out.println("");
+				for(int j = locationInformation; j <= i; j++) {
+					group[t][j] = violationNumber[i];
+					System.out.print(group[t][j] + ",");
+					
+				}
+				t++;
+				locationInformation = -1;
+				
+		 	
+				
+			}
+			
+			
 		}
+		
+		System.out.println("");
+		System.out.println("");
+		System.out.println("나눠진 그룹의 개수: " + t);
+		
+		
 		
 	}
 
