@@ -24,15 +24,15 @@ public class InstancesTest {
 	private int row;
 	private int locationInformation;
 	
-	private int[][] v; //µÚÁýÈù instances
+	private int[][] v; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ instances
 	private int[][] arrayForMetricSelection;
 	private int[] b;//sliced instance
 	private int[] ob;//original sliced instance
-	private int[][] c; //À§Ä¡Á¤º¸ ÀúÀå
-	private int[] violationNumber;//instanceº° violation °³¼ö
-	private int[] oViolationNumber;//original instanceº° violation °³¼ö
+	private int[][] c; //ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private int[] violationNumber;//instanceï¿½ï¿½ violation ï¿½ï¿½ï¿½ï¿½
+	private int[] oViolationNumber;//original instanceï¿½ï¿½ violation ï¿½ï¿½ï¿½ï¿½
 	private String[] bugLabel;
-	private int[][] group;//violation°³¼ö¿¡ µû¸¥ gruopºÐ·ù
+	private int[][] group;//violationï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ gruopï¿½Ð·ï¿½
 	private int[] numbersInGroup;
 	private int numberInGroup;
 	
@@ -41,7 +41,7 @@ public class InstancesTest {
 	private int[] medians;
 	private int vMedian;
 	private int k;
-	private int t;//gruop[t][]ÀÇ Çà¿¡ ÇØ´ç
+	private int t;//gruop[t][]ï¿½ï¿½ ï¿½à¿¡ ï¿½Ø´ï¿½
 	private int q;
 	private int y;//medians[y]
 	private int[] kNumber;
@@ -52,7 +52,7 @@ public class InstancesTest {
 		runner.run(args);
 	}
 	
-	public static Instances loadArff(String path){//instance µ¥ÀÌÅÍ ¼öÁý
+	public static Instances loadArff(String path){//instance ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		Instances instances=null;
 		BufferedReader reader;
 		try {
@@ -74,10 +74,10 @@ public class InstancesTest {
 	private void run(String[] args) {
 		y = 0;
 		q = 0;
-		ins = loadArff(args[0]);//ins¿¡ ÇÒ´ç
-		in = ins.get(0);//Ã¹ ÁÙ instance ÇÒ´ç
-		column = in.numAttributes();//¿­ÀÇ °³¼ö
-		row = ins.size();//ÇàÀÇ °³¼ö
+		ins = loadArff(args[0]);//insï¿½ï¿½ ï¿½Ò´ï¿½
+		in = ins.get(0);//Ã¹ ï¿½ï¿½ instance ï¿½Ò´ï¿½
+		column = in.numAttributes();//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		row = ins.size();//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		numbersInGroup = new int[column];
 		numberInGroup = 0;
@@ -115,8 +115,8 @@ public class InstancesTest {
 		System.out.println("");
 		System.out.println("");
 		
-		v = new int[column][row];// Çà°ú ¿­ µÚÁýÀº ¹è¿­ °Å ¿©±â ÀúÀå
-		b = new int[row];// µÚÁýÈù ¹è¿­, 1Çà ¿©±â ÀúÀå
+		v = new int[column][row];// ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		b = new int[row];// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­, 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		arrayForMetricSelection = new int[column][row];
 		
 		for(int i = 0; i < column - 1; i++) {
@@ -125,7 +125,7 @@ public class InstancesTest {
 				in = ins.get(j);
 				v[i][j] = (int)in.valueSparse(i);
 				
-					System.out.print(v[i][j] + ",");//Çà°ú ¿­ µÚÁýÀ½
+					System.out.print(v[i][j] + ",");//ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				
 		}
 		}
@@ -139,26 +139,26 @@ public class InstancesTest {
 		System.out.println("");
 		System.out.println("");
 		
-		for(int j = 0; j < column - 1; j++) {//violationÀÇ À§Ä¡¸¦ ±¸ÇÑ´Ù.
+		for(int j = 0; j < column - 1; j++) {//violationï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
 		
-		System.out.println("***   "+ j +  "¹øÂ° metric   ***");
+		System.out.println("***   "+ j +  "ï¿½ï¿½Â° metric   ***");
 		for(int i = 0; i < row - 1; i++) {
 		b[i] = v[j][i];
-		System.out.print(b[i] + ",");// µÚÁýÈù Ã¹¹øÂ° instance ÀúÀå
+		System.out.print(b[i] + ",");// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¹ï¿½ï¿½Â° instance ï¿½ï¿½ï¿½ï¿½
 		}
 		
 		System.out.println("");
 		
-		ob = new int[row];//ÃÊ±âÈ­
+		ob = new int[row];//ï¿½Ê±ï¿½È­
 		k = 0;
 		c = new int[column][row];
 		
 		for(int i = 0; i < row - 1; i++)
-			ob[i] = b[i];//Á¤·ÄµÇÁö ¾ÊÀº ±âÁ¸ÀÇ ¹è¿­ ÀúÀå
+			ob[i] = b[i];//ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½
 		
-		Arrays.sort(b); //Á¤·Ä
+		Arrays.sort(b); //ï¿½ï¿½ï¿½ï¿½
 		
-		System.out.println("Á¤·ÄµÈ metrices");
+		System.out.println("ï¿½ï¿½ï¿½Äµï¿½ metrices");
 		for(int i = 0; i < row - 1; i++){
 			System.out.print(b[i] + ",");
 		}
@@ -169,9 +169,9 @@ public class InstancesTest {
 		medians[y] = median;
 		y++;
 		
-		System.out.println("median °ª: " + median);
+		System.out.println("median ï¿½ï¿½: " + median);
 		
-		for(int i = 0; i < row - 1; i++) {//violation À§Ä¡
+		for(int i = 0; i < row - 1; i++) {//violation ï¿½ï¿½Ä¡
 			if(ob[i] > median) {
 				c[j][k] = i;
 				violationNumber[i]++;
@@ -179,12 +179,12 @@ public class InstancesTest {
 			}
 		}
 		
-		System.out.println(j + " ¹øÂ° metric violation À§Ä¡");
+		System.out.println(j + " ï¿½ï¿½Â° metric violation ï¿½ï¿½Ä¡");
 		for(int i =0; i < k; i++) {
 			System.out.print(c[j][i] + ",");
 		}
 		System.out.println("");
-		System.out.println(j + " ¹øÂ° metric violationÀÇ °³¼ö: " + k);
+		System.out.println(j + " ï¿½ï¿½Â° metric violationï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + k);
 		System.out.println("");
 		System.out.println("");
 		
@@ -194,7 +194,7 @@ public class InstancesTest {
 		}
 		
 		System.out.println("");
-		System.out.println("°¢°¢ÀÇ metricÀÇ violation °³¼ö");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ metricï¿½ï¿½ violation ï¿½ï¿½ï¿½ï¿½");
 		
 		for(int i = 0; i < p; i++) {
 			System.out.print(kNumber[i] + ",");
@@ -204,7 +204,7 @@ public class InstancesTest {
 		System.out.println("");
 		System.out.println("");
 		
-		System.out.println("instanceº° violation°³¼ö");//instanceº° violation°³¼ö
+		System.out.println("instanceï¿½ï¿½ violationï¿½ï¿½ï¿½ï¿½");//instanceï¿½ï¿½ violationï¿½ï¿½ï¿½ï¿½
 		for(int i = 0; i < row - 1; i++) {
 			System.out.print(violationNumber[i] + ",");
 		}
@@ -219,7 +219,7 @@ public class InstancesTest {
 		
 		Arrays.sort(violationNumber);
 		System.out.println("");
-		System.out.println("sortµÈ violationNumber");//sortµÈ violationNumber
+		System.out.println("sortï¿½ï¿½ violationNumber");//sortï¿½ï¿½ violationNumber
 		for(int i = 0; i < row; i++) {
 			System.out.print(violationNumber[i] + ",");
 		}
@@ -228,7 +228,7 @@ public class InstancesTest {
 		
 		t = 0;
 		System.out.println("groups");
-		for(int i = 0; i < row - 1; i++) {//±×·ì³ª´©±â
+		for(int i = 0; i < row - 1; i++) {//ï¿½×·ì³ªï¿½ï¿½ï¿½ï¿½
 			if(locationInformation == -1)
 				locationInformation = i;
 			
@@ -252,13 +252,13 @@ public class InstancesTest {
 		
 		System.out.println("");
 		System.out.println("");
-		System.out.println("³ª´²Áø ±×·ìÀÇ °³¼ö: " + t);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + t);
 		
 		vMedian = t / 2;
-		System.out.println("±×·ìÀÇ Áß°£°ª °³¼ö: " + vMedian);
+		System.out.println("ï¿½×·ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + vMedian);
 		System.out.println("");
 		
-		for(int i = 0; i < row - 1; i++) {//¶óº§ºÙÀÌ±â
+		for(int i = 0; i < row - 1; i++) {//ï¿½óº§ºï¿½ï¿½Ì±ï¿½
 			if(oViolationNumber[i] > 13) {
 				bugLabel[i] = "B";
 			}
@@ -268,23 +268,23 @@ public class InstancesTest {
 		}
 		
 		System.out.println("");
-		System.out.println("¹ö±× ºÐ·ù");
-		for(int i = 0; i < row - 1; i++) {//¹ö±× ¶óº§
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½Ð·ï¿½");
+		for(int i = 0; i < row - 1; i++) {//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 			System.out.print("instance" + i +  " : "+ bugLabel[i] + ", ");
 		}
 		System.out.println("");
 		
 		System.out.println("");
-		System.out.println("median°ªµé");
-		for(int i = 0; i < column - 1; i++) {//median°ªµé
-			System.out.print(i + "¹ø Â° metricÀÇ median: " + medians[i] + ", "
+		System.out.println("medianï¿½ï¿½ï¿½ï¿½");
+		for(int i = 0; i < column - 1; i++) {//medianï¿½ï¿½ï¿½ï¿½
+			System.out.print(i + "ï¿½ï¿½ Â° metricï¿½ï¿½ median: " + medians[i] + ", "
 					+ "");
 		}
 		System.out.println("");
 		
 		
 		
-		for(int i = 0; i < column - 1; i++) {//metric selectionÀ» À§ÇØ arrayForMetricSelection¿¡¼­ violation¿¡ 1À» ÀÔ·Â
+		for(int i = 0; i < column - 1; i++) {//metric selectionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ arrayForMetricSelectionï¿½ï¿½ï¿½ï¿½ violationï¿½ï¿½ 1ï¿½ï¿½ ï¿½Ô·ï¿½
 			for(int j = 0; j < row - 1; j++) {
 				System.out.print(".");
 				if(v[i][j] < medians[j] && bugLabel[j].equals("B")) {
@@ -300,7 +300,7 @@ public class InstancesTest {
 		
 		System.out.println("");
 		System.out.println("");
-		System.out.println("violationÀ§Ä¡");
+		System.out.println("violationï¿½ï¿½Ä¡");
 		for(int i = 0; i < column - 1; i++) {
 			System.out.println("");
 			for(int j = 0; j < row - 1; j++) {
